@@ -1,33 +1,38 @@
-name: Release
+name: Publish & Release
 
 on:
   push:
     tags:
-      - '*.*.*'   # Déclenche sur les tags de type 1.0.0, 2.4.5, etc.
+      - '*.*.*'
 
 jobs:
-  build:
+  build-publish-release:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up JDK
+      - name: Set up Java & Maven for GitHub Packages
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '21'
+          server-id: github
+          server-username: ${{ github.actor }}
+          server-password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build with Maven
-        run: mvn package
+        run: mvn clean package
 
-      - name: Install GitHub CLI
-        uses: cli/cli@latest
+      - name: Publish to GitHub Packages
+        run: mvn deploy -DskipTests
 
-      - name: Create GitHub Release via gh CLI
+      - name: Install gh cli
+        uses: cli/gh-action@v2
+
+      - name: Create Release & Upload JAR
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          TAG_NAME=$(echo $GITHUB_REF | sed 's/refs\/tags\///')
-          gh release create "$TAG_NAME" target/*.jar --notes "Release $TAG_NAME"
+          TAG_NAME="${GITHUB_REF#refs/tags/}"
+          gh release create "$TAG_NAME" target/*.jar --title "$TAG_NAME" --notes "Release $TAG_NAME" --repo ${{ github.repository }}
