@@ -35,6 +35,6 @@ jobs:
       - name: Create GitHub Release via gh CLI
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  run: |
+        run: |
           TAG_NAME=$(echo $GITHUB_REF | sed 's/refs\/tags\///')
-        gh release create "$TAG_NAME" target/*.jar --notes "Release $TAG_NAME"
+          gh release create "$TAG_NAME" target/*.jar --notes "Release $TAG_NAME"
