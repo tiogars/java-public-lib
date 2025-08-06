@@ -1,0 +1,9 @@
+- name: Install GitHub CLI
+  uses: cli/cli@latest
+
+- name: Create GitHub Release via gh CLI
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  run: |
+    TAG_NAME=$(echo $GITHUB_REF | sed 's/refs\/tags\///')
+    gh release create "$TAG_NAME" target/*.jar --notes "Release $TAG_NAME"
