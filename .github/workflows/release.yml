@@ -27,9 +27,6 @@ jobs:
       - name: Publish to GitHub Packages
         run: mvn deploy -DskipTests
 
-      - name: Install gh cli
-        uses: cli/gh-action@v2
-
       - name: Create Release & Upload JAR
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
