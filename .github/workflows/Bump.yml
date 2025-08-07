@@ -19,7 +19,8 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '21'
+          cache: 'maven'
 
       - name: Change Maven version
         run: mvn versions:set -DnewVersion=${{ github.event.inputs.new_version }}
@@ -44,3 +45,8 @@ jobs:
           gh release create "$TAG" --title "$TAG" --notes "Release $TAG"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish to GitHub Packages
+        run: mvn --batch-mode deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
