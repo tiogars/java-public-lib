@@ -9,8 +9,8 @@
   <artifactId>java-public-lib</artifactId>
   <version>1.0.0-SNAPSHOT</version>
 
-  <name>myclass</name>
-  <description>MyClass is a sample Java class.</description>
+  <name>java-public-lib</name>
+  <description>Java Public Library</description>
   <url>http://www.example.com</url>
 
   <properties>

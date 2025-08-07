@@ -5,13 +5,12 @@ on:
     tags:
       - '*.*.*'
 
-permissions:
-  contents: write
-  packages: write
-
 jobs:
   build-publish-release:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -23,15 +22,7 @@ jobs:
           java-version: '21'
           cache: 'maven'
 
-      - name: Build with Maven
-        run: mvn clean package
-
       - name: Publish to GitHub Packages
-        run: mvn deploy -DskipTests
-
-      - name: Create Release & Upload JAR
+        run: mvn --batch-mode deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          TAG_NAME="${GITHUB_REF#refs/tags/}"
-          gh release create "$TAG_NAME" target/*.jar --title "$TAG_NAME" --notes "Release $TAG_NAME" --repo ${{ github.repository }}
