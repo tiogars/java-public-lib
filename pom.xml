@@ -6,7 +6,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>fr.tiogars.myentity</groupId>
-  <artifactId>myclass</artifactId>
+  <artifactId>java-public-lib</artifactId>
   <version>1.0.0-SNAPSHOT</version>
 
   <name>myclass</name>
@@ -23,7 +23,7 @@
     <repository>
       <id>github</id>
       <name>GitHub Packages</name>   
- <url>https://maven.pkg.github.com/tiogars/java-public-lib</url>
+      <url>https://maven.pkg.github.com/tiogars/java-public-lib</url>
     </repository>
   </distributionManagement>
 
