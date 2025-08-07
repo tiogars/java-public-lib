@@ -28,12 +28,13 @@ i7<?xml version="1.0" encoding="UTF-8"?>
   </distributionManagement>
 
   <dependencies>
-    <dependency>
-      <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-engine</artifactId>
-      <version>5.12.2</version>
-      <scope>test</scope>
-    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
+<dependency>
+    <groupId>org.junit.jupiter</groupId>
+    <artifactId>junit-jupiter-engine</artifactId>
+    <version>5.13.4</version>
+    <scope>test</scope>
+</dependency>
     <!-- https://mvnrepository.com/artifact/org.apache.maven.doxia/doxia-core -->
     <dependency>
       <groupId>org.apache.maven.doxia</groupId>
