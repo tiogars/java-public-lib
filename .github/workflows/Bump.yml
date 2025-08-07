@@ -31,3 +31,16 @@ jobs:
           git add pom.xml
           git commit -m "Bump version to ${{ github.event.inputs.new_version }}"
           git push
+
+      - name: Create and push tag
+        run: |
+          TAG="v${{ github.event.inputs.new_version }}"
+          git tag $TAG
+          git push origin $TAG
+
+      - name: Create GitHub Release
+        run: |
+          TAG="v${{ github.event.inputs.new_version }}"
+          gh release create "$TAG" --title "$TAG" --notes "Release $TAG"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
