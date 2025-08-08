@@ -42,17 +42,17 @@ jobs:
           git tag $TAG
           git push origin $TAG
 
-      - name: Create GitHub Release
-        run: |
-          TAG="v${{ github.event.inputs.new_version }}"
-          gh release create "$TAG" --title "$TAG" --notes "Release $TAG"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Publish to GitHub Packages
         run: mvn --batch-mode deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create GitHub Release
+        run: |
+          TAG="${{ github.event.inputs.new_version }}"
+          gh release create "$TAG" --title "$TAG" --notes "Release $TAG"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Bump to next snapshot version
         run: mvn versions:set -DnewVersion=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout | awk -F. '{print $1"."$2"."$3+1"-SNAPSHOT"}')
