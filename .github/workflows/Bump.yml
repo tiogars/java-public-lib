@@ -38,7 +38,7 @@ jobs:
 
       - name: Create and push tag
         run: |
-          TAG="v${{ github.event.inputs.new_version }}"
+          TAG="${{ github.event.inputs.new_version }}"
           git tag $TAG
           git push origin $TAG
 
