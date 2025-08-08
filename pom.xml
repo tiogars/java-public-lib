@@ -7,7 +7,7 @@
 
   <groupId>fr.tiogars</groupId>
   <artifactId>java-public-lib</artifactId>
-  <version>1.0.10-SNAPSHOT</version>
+  <version>1.0.10</version>
 
   <name>java-public-lib</name>
   <description>Java Public Library</description>
