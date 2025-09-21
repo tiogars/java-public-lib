@@ -1,4 +1,4 @@
-i7name: Deploy Maven Site to GitHub Pages with gh
+name: Deploy Maven Site to GitHub Pages with gh
 on:
   push:
     branches: [main]
