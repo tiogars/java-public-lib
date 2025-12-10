@@ -11,7 +11,7 @@
 
   <name>java-public-lib</name>
   <description>Java Public Library</description>
-  <url>http://www.example.com</url>
+  <url>https://tiogars.github.io/java-public-lib</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
